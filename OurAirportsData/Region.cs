@@ -11,13 +11,20 @@ namespace OurAirportsData
     [IgnoreEmptyLines]
     public class Region
     {
-        [FieldQuoted] public string Code;
-        [FieldQuoted] public string Continent;
         public int Id;
-        [FieldQuoted] public string IsoCountry;
-        [FieldQuoted] public string Keywords;
-        [FieldQuoted] public string LocalCode;
-        [FieldQuoted] public string Name;
-        [FieldQuoted] public string WikipediaLink;
+        [FieldQuoted]
+        public string Code;
+        [FieldQuoted(QuoteMode.OptionalForBoth)]
+        public string LocalCode;
+        [FieldQuoted]
+        public string Name;
+        [FieldQuoted]
+        public string Continent;
+        [FieldQuoted]
+        public string IsoCountry;
+        [FieldQuoted]
+        public string WikipediaLink;
+        [FieldQuoted]
+        public string Keywords;
     }
 }

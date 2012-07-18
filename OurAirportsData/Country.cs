@@ -11,11 +11,16 @@ namespace OurAirportsData
     [IgnoreEmptyLines]
     public class Country
     {
-        [FieldQuoted] public string Code;
-        [FieldQuoted] public string Continent;
         public int Id;
-        [FieldQuoted] public string Keywords;
-        [FieldQuoted] public string Name;
-        [FieldQuoted] public string WikipediaLink;
+        [FieldQuoted]
+        public string Code;
+        [FieldQuoted]
+        public string Name;
+        [FieldQuoted]
+        public string Continent;
+        [FieldQuoted]
+        public string WikipediaLink;
+        [FieldQuoted]
+        public string Keywords;
     }
 }

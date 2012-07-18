@@ -5,13 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Places", "Places\Places.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurAirportsData", "OurAirportsData\OurAirportsData.csproj", "{641BCCEC-FCEF-4D50-A9FB-FB5CF148D457}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B85CD9D8-4EBD-44E6-B4C9-892EAA23CA89}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		Places.vsmdi = Places.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{2EF5C9DB-ACB5-47E3-AC99-2A16E786C990}"
 EndProject
 Global
@@ -29,9 +22,6 @@ Global
 		SccProjectUniqueName3 = Test\\Test.csproj
 		SccProjectName3 = Test
 		SccLocalPath3 = Test
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Places.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
