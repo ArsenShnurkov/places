@@ -21,7 +21,7 @@ namespace OurAirportsData
         [FieldQuoted]
         public string Continent;
         [FieldQuoted]
-        public string IsoCountry;
+        public string CountryIso;
         [FieldQuoted]
         public string WikipediaLink;
         [FieldQuoted]
