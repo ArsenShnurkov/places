@@ -4,39 +4,42 @@ using FileHelpers;
 namespace OurAirportsData
 {
     /// <summary>
-    /// gets the data form the OurAirports files
+    /// gets the data from the OurAirports files
     /// </summary>
     public static class Data
     {
         /// <summary>
-        /// gets the countries from the OurAirports file
+        /// gets the Countries from the OurAirports file
         /// </summary>
-        /// <returns>countries list</returns>
+        /// <param name="filePath">the file path</param>
+        /// <returns>Country list</returns>
         public static IEnumerable<Country> GetCountries(string filePath)
         {
-            var engine = new FileHelperEngine(typeof (Country));
+            var engine = new FileHelperEngine(typeof(Country));
             var countries = engine.ReadFile(filePath) as IEnumerable<Country>;
             return countries;
         }
 
         /// <summary>
-        /// gets the regions from the OurAirports file
+        /// gets the Regions from the OurAirports file
         /// </summary>
-        /// <returns>regions list</returns>
+        /// <param name="filePath">the file path</param>
+        /// <returns>Region list</returns>
         public static IEnumerable<Region> GetRegions(string filePath)
         {
-            var engine = new FileHelperEngine(typeof (Region));
+            var engine = new FileHelperEngine(typeof(Region));
             var regions = engine.ReadFile(filePath) as IEnumerable<Region>;
             return regions;
         }
 
         /// <summary>
-        /// gets the airports from the OurAirports file
+        /// gets the Airports from the OurAirports file
         /// </summary>
-        /// <returns>airports list</returns>
+        /// <param name="filePath">the file path</param>
+        /// <returns>Airport list</returns>
         public static IEnumerable<Airport> GetAirports(string filePath)
         {
-            var engine = new FileHelperEngine(typeof (Airport));
+            var engine = new FileHelperEngine(typeof(Airport));
             var airports = engine.ReadFile(filePath) as IEnumerable<Airport>;
             return airports;
         }

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2EF5C9DB-ACB5-47E3-AC99-2A16E786C990}</ProjectGuid>
+    <ProjectGuid>{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test</RootNamespace>
-    <AssemblyName>Test</AssemblyName>
+    <RootNamespace>MaxMindData</RootNamespace>
+    <AssemblyName>MaxMindData</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -35,36 +35,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileHelpers">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers.DataLink">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.DataLink.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers.ExcelStorage">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.ExcelStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Excel">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.Office">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\Interop.Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MaxMindData.cs" />
-    <Compile Include="OurAirportsData.cs" />
+    <Compile Include="CityName.cs" />
+    <Compile Include="CountryName.cs" />
+    <Compile Include="Data.cs" />
+    <Compile Include="NonNorthAmericaRegionName.cs" />
+    <Compile Include="NorthAmericaRegionName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MaxMindData\MaxMindData.csproj">
-      <Project>{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}</Project>
-      <Name>MaxMindData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OurAirportsData\OurAirportsData.csproj">
-      <Project>{641BCCEC-FCEF-4D50-A9FB-FB5CF148D457}</Project>
-      <Name>OurAirportsData</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

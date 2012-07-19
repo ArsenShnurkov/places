@@ -75,6 +75,8 @@
     <Compile Include="Airport.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="MaxMindLoader.cs" />
+    <Compile Include="OurAirportsLoader.cs" />
     <Compile Include="PlacesLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

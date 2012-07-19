@@ -4,8 +4,16 @@ using Xunit;
 
 namespace Test
 {
-    public class OurAirportsData
+    public class MaxMindData
     {
+        [Fact]
+        public void CountryNamesNotEmpty()
+        {
+            var filePath = ConfigurationManager.AppSettings["MaxMind_CountriesPath"];
+            var countries = Data.GetCountryNames(filePath);
+            Assert.NotEmpty(countries);
+        }
+
         [Fact]
         public void NonNorthAmericaRegionsNotEmpty()
         {

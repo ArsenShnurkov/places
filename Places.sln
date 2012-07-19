@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurAirportsData", "OurAirpo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{2EF5C9DB-ACB5-47E3-AC99-2A16E786C990}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxMindData", "MaxMindData\MaxMindData.csproj", "{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://legendserver:8080/tfs/proyectos
 		SccLocalPath0 = .
@@ -22,6 +24,9 @@ Global
 		SccProjectUniqueName3 = Test\\Test.csproj
 		SccProjectName3 = Test
 		SccLocalPath3 = Test
+		SccProjectUniqueName4 = MaxMindData\\MaxMindData.csproj
+		SccProjectName4 = MaxMindData
+		SccLocalPath4 = MaxMindData
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +67,16 @@ Global
 		{2EF5C9DB-ACB5-47E3-AC99-2A16E786C990}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2EF5C9DB-ACB5-47E3-AC99-2A16E786C990}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2EF5C9DB-ACB5-47E3-AC99-2A16E786C990}.Release|x86.ActiveCfg = Release|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
