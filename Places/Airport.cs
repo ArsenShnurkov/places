@@ -7,8 +7,9 @@ namespace Places
         [RequiredAttribute]
         [KeyAttribute]
         public int Id { get; set; }
-        
+
         [RequiredAttribute]
+        [StringLengthAttribute(7)]
         public string Ident { get; set; }
 
         [RequiredAttribute]
@@ -22,24 +23,25 @@ namespace Places
 
         [RequiredAttribute]
         public double Longitude { get; set; }
-        
-        public int Elevation { get; set; }
 
-        [RequiredAttribute]
+        public int? Elevation { get; set; }
+
         public string Municipality { get; set; }
 
         [RequiredAttribute]
         public bool ScheduledService { get; set; }
 
+        [StringLengthAttribute(4)]
         public string GpsCode { get; set; }
 
         [StringLengthAttribute(3)]
         public string IataCode { get; set; }
 
+        [StringLengthAttribute(4)]
         public string LocalCode { get; set; }
-        
+
         public string HomeLink { get; set; }
-        
+
         public string WikipediaLink { get; set; }
 
         [RequiredAttribute]

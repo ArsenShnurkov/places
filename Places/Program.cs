@@ -5,7 +5,7 @@ namespace Places
     {
         private static void Main(string[] args)
         {
-            PlacesLoader.Start();
+            PlacesLoader.LoadPlacesFromOurAirports();
             Console.ReadKey();
         }
     }
