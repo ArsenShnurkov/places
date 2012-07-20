@@ -15,7 +15,7 @@ namespace Test
         }
 
         [Fact]
-        public void NonNorthAmericaRegionsNotEmpty()
+        public void NonNorthAmericaRegionNamesNotEmpty()
         {
             var filePath = ConfigurationManager.AppSettings["MaxMind_NonNorthAmericaRegionsPath"];
             var regions = Data.GetNonNorthAmericaRegionNames(filePath);
@@ -23,7 +23,7 @@ namespace Test
         }
 
         [Fact]
-        public void NorthAmericaRegionsNotEmpty()
+        public void NorthAmericaRegionNamesNotEmpty()
         {
             var filePath = ConfigurationManager.AppSettings["MaxMind_NorthAmericaRegionsPath"];
             var regions = Data.GetNorthAmericaRegionNames(filePath);
@@ -31,7 +31,7 @@ namespace Test
         }
 
         [Fact]
-        public void CitiesNamesNotEmpty()
+        public void CityNamesNotEmpty()
         {
             var filePath = ConfigurationManager.AppSettings["MaxMind_CitiesPath"];
             var cities = Data.GetCityNames(filePath);
