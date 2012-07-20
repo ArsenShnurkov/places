@@ -75,8 +75,8 @@
     <Compile Include="Airport.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="MaxMindLoader.cs" />
-    <Compile Include="OurAirportsLoader.cs" />
+    <Compile Include="MaxMindHandler.cs" />
+    <Compile Include="OurAirportsHandler.cs" />
     <Compile Include="PlacesLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MaxMindData\MaxMindData.csproj">
+      <Project>{DF590E70-C29E-4DD2-8844-9D87CDE2ABD5}</Project>
+      <Name>MaxMindData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OurAirportsData\OurAirportsData.csproj">
       <Project>{641BCCEC-FCEF-4D50-A9FB-FB5CF148D457}</Project>
       <Name>OurAirportsData</Name>

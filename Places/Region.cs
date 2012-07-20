@@ -19,6 +19,8 @@ namespace Places
         [RequiredAttribute]
         public string Name { get; set; }
 
+        public string NameEs { get; set; }
+
         public string WikipediaLink { get; set; }
 
         [RequiredAttribute]

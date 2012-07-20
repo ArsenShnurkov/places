@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FileHelpers;
+using System.Text;
 
 namespace MaxMindData
 {
@@ -15,19 +16,19 @@ namespace MaxMindData
         /// <returns>CountryName list</returns>
         public static IEnumerable<CountryName> GetCountryNames(string filePath)
         {
-            var engine = new FileHelperEngine(typeof(CountryName));
+            var engine = new FileHelperEngine(typeof(CountryName)) { Encoding = new UTF8Encoding() };
             var countryNames = engine.ReadFile(filePath) as IEnumerable<CountryName>;
             return countryNames;
         }
 
         /// <summary>
-        /// gets the NonNorthAmericaRegionName from the MaxMind file
+        /// gets the NonNorthAmericaRegionNames from the MaxMind file
         /// </summary>
         /// <param name="filePath">the file path</param>
         /// <returns>NonNorthAmericaRegionName list</returns>
         public static IEnumerable<NonNorthAmericaRegionName> GetNonNorthAmericaRegionNames(string filePath)
         {
-            var engine = new FileHelperEngine(typeof(NonNorthAmericaRegionName));
+            var engine = new FileHelperEngine(typeof(NonNorthAmericaRegionName)) { Encoding = new UTF8Encoding() };
             var regionNames = engine.ReadFile(filePath) as IEnumerable<NonNorthAmericaRegionName>;
             return regionNames;
         }
@@ -39,7 +40,7 @@ namespace MaxMindData
         /// <returns>NorthAmericaRegionName list</returns>
         public static IEnumerable<NorthAmericaRegionName> GetNorthAmericaRegionNames(string filePath)
         {
-            var engine = new FileHelperEngine(typeof(NorthAmericaRegionName));
+            var engine = new FileHelperEngine(typeof(NorthAmericaRegionName)) { Encoding = new UTF8Encoding() };
             var regionNames = engine.ReadFile(filePath) as IEnumerable<NorthAmericaRegionName>;
             return regionNames;
         }
@@ -48,10 +49,10 @@ namespace MaxMindData
         /// gets the CityNames from the MaxMind file
         /// </summary>
         /// <param name="filePath">the file path</param>
-        /// <returns>CityNames list</returns>
+        /// <returns>CityName list</returns>
         public static IEnumerable<CityName> GetCityNames(string filePath)
         {
-            var engine = new FileHelperEngine(typeof(CityName));
+            var engine = new FileHelperEngine(typeof(CityName)) { Encoding = new UTF8Encoding() };
             var cityNames = engine.ReadFile(filePath) as IEnumerable<CityName>;
             return cityNames;
         }

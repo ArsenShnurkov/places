@@ -1,19 +1,40 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace Places
 {
-    class PlacesLoader
+    internal class PlacesLoader
     {
-        internal static void Start()
+        /// <summary>
+        /// generates a database with Countries, Regions and Airports
+        /// </summary>
+        internal static void GeneratePlacesDataBase()
         {
             // drop and re-create the database
             Database.SetInitializer(new DropCreateDatabaseAlways<Context>());
 
-            // load places from OurAirports
-            OurAirportsLoader.LoadPlaces();
+            // gets and saves Countries
+            var ourAirportsHandler = new OurAirportsHandler();
+            var countries = ourAirportsHandler.GetCountries();
+            SaveCountries(countries);
+        }
 
-            // sets places names
-            MaxMindLoader.SetPlacesNames();
+        /// <summary>
+        /// save Countries to database
+        /// </summary>
+        /// <param name="countries">Countries to save</param>
+        private static void SaveCountries(IEnumerable<Country> countries)
+        {
+            using (var db = new Context())
+            {
+                foreach (var country in countries)
+                {
+                    db.Countries.Add(country);
+                }
+                db.SaveChanges();
+            }
+            Console.WriteLine("All countries have been added.");
         }
     }
 }

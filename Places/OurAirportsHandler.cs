@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
@@ -9,20 +8,33 @@ namespace Places
     /// <summary>
     /// handler for OurAirports files loading
     /// </summary>
-    internal static class OurAirportsLoader
+    internal class OurAirportsHandler
     {
+        // defaults
+        private const string SpanishLangugeCode = "es";
+
+        // file paths
+        private readonly string _ourAirportsCountriesFilePath =
+            ConfigurationManager.AppSettings["OurAirports_CountriesPath"];
+        private readonly string _ourAirportsRegionsFilePath =
+            ConfigurationManager.AppSettings["OurAirports_RegionsPath"];
+        private readonly string _ourAirportsAirportsFilePath =
+            ConfigurationManager.AppSettings["OurAirports_AirportsPath"];
+
+        // MaxMind hanlder
+        private readonly MaxMindHandler _maxMindHandler = new MaxMindHandler();
+
         /// <summary>
-        /// loads Countries, Regions and Airports from OurAirports files
+        /// get Countries with their Regions and Airports from OurAirports files
         /// </summary>
-        internal static void LoadPlaces()
+        /// <returns>Country list</returns>
+        internal List<Country> GetCountries()
         {
-            // get data from OurAirports.com
-            var ourAirportsCountriesFilePath = ConfigurationManager.AppSettings["OurAirports_CountriesPath"];
-            var ourAirportsCountries = OurAirportsData.Data.GetCountries(ourAirportsCountriesFilePath).ToList();
-            var ourAirportsRegionsFilePath = ConfigurationManager.AppSettings["OurAirports_RegionsPath"];
-            var ourAirportsRegions = OurAirportsData.Data.GetRegions(ourAirportsRegionsFilePath).ToList();
-            var ourAirportsAirportsFilePath = ConfigurationManager.AppSettings["OurAirports_AirportsPath"];
-            var ourAirportsAirports = OurAirportsData.Data.GetAirports(ourAirportsAirportsFilePath).ToList();
+            // get data from OurAirports
+            var ourAirportsCountries = OurAirportsData.Data.GetCountries(_ourAirportsCountriesFilePath).ToList();
+            var ourAirportsRegions = OurAirportsData.Data.GetRegions(_ourAirportsRegionsFilePath).ToList();
+            var ourAirportsAirports = OurAirportsData.Data.GetAirports(_ourAirportsAirportsFilePath)
+                .Where(model => model.ScheduledService == "yes").ToList();
 
             // build Countries list
             var countries = BuildCountries(ourAirportsCountries);
@@ -33,16 +45,15 @@ namespace Places
             // add Airports to their Region
             AddAirportsToCountryRegions(ourAirportsAirports, ref countries);
 
-            // save Countries
-            SaveCountries(countries);
+            return countries;
         }
 
         /// <summary>
         /// add Regions to their Country
         /// </summary>
         /// <param name="ourAirportsRegions">OurAirports regions</param>
-        /// <param name="countries">Countries list</param>
-        private static void AddRegionsToCountries(List<OurAirportsData.Region> ourAirportsRegions,
+        /// <param name="countries">Country list</param>
+        private void AddRegionsToCountries(List<OurAirportsData.Region> ourAirportsRegions,
             ref List<Country> countries)
         {
             foreach (var country in countries)
@@ -50,7 +61,8 @@ namespace Places
                 var ourAirportsCountryRegions = ourAirportsRegions
                     .Where(model => country.Code == model.CountryIso);
 
-                foreach (var region in ourAirportsCountryRegions.Select(BuildRegion))
+                var regions = ourAirportsCountryRegions.Select(model => BuildRegion(model, country.Continent, country.Code));
+                foreach (var region in regions)
                 {
                     region.Country = country;
                     country.Regions.Add(region);
@@ -62,8 +74,8 @@ namespace Places
         /// add Airports to their Region
         /// </summary>
         /// <param name="ourAirportsAirports">OurAirports airports</param>
-        /// <param name="countries">Countries list</param>
-        private static void AddAirportsToCountryRegions(List<OurAirportsData.Airport> ourAirportsAirports,
+        /// <param name="countries">Country list</param>
+        private void AddAirportsToCountryRegions(List<OurAirportsData.Airport> ourAirportsAirports,
             ref List<Country> countries)
         {
             var regions = countries.SelectMany(model => model.Regions).ToList();
@@ -85,7 +97,7 @@ namespace Places
         /// </summary>
         /// <param name="ourAirportsRegionAirport">OurAirports airport</param>
         /// <returns>the Airport</returns>
-        private static Airport BuildAirport(OurAirportsData.Airport ourAirportsRegionAirport)
+        private Airport BuildAirport(OurAirportsData.Airport ourAirportsRegionAirport)
         {
             var airport = new Airport
                 {
@@ -98,8 +110,9 @@ namespace Places
                     LocalCode = ourAirportsRegionAirport.LocalCode,
                     Longitude = ourAirportsRegionAirport.Longitude,
                     Municipality = ourAirportsRegionAirport.Municipality,
+                    MunicipalityEs = _maxMindHandler.GetCityName(ourAirportsRegionAirport.Municipality, SpanishLangugeCode),
                     Name = ourAirportsRegionAirport.Name,
-                    ScheduledService = ourAirportsRegionAirport.ScheduledService == "yes" ? true : false,
+                    ScheduledService = ourAirportsRegionAirport.ScheduledService == "yes",
                     Type = ourAirportsRegionAirport.Type,
                     WikipediaLink = ourAirportsRegionAirport.WikipediaLink
                 };
@@ -109,15 +122,21 @@ namespace Places
         /// <summary>
         /// build a Region
         /// </summary>
-        /// <param name="ourAirportsCountryRegion">OurAirports region</param>
+        /// <param name="ourAirportsCountryRegion">>OurAirports region</param>
+        /// <param name="continent">the continent code</param>
+        /// <param name="countryCode">the Country code</param>
         /// <returns>the Region</returns>
-        private static Region BuildRegion(OurAirportsData.Region ourAirportsCountryRegion)
+        private Region BuildRegion(OurAirportsData.Region ourAirportsCountryRegion,
+            string continent, string countryCode)
         {
             var region = new Region
             {
                 Code = ourAirportsCountryRegion.Code,
                 LocalCode = ourAirportsCountryRegion.LocalCode,
                 Name = ourAirportsCountryRegion.Name,
+                NameEs = continent == "NA" ?
+                    _maxMindHandler.GetNorthAmericaRegionName(countryCode, ourAirportsCountryRegion.LocalCode, SpanishLangugeCode) :
+                    _maxMindHandler.GetNonNorthAmericaRegionName(countryCode, ourAirportsCountryRegion.Name, SpanishLangugeCode),
                 WikipediaLink = ourAirportsCountryRegion.WikipediaLink,
                 Airports = new Collection<Airport>()
             };
@@ -128,8 +147,8 @@ namespace Places
         /// build a Countries list
         /// </summary>
         /// <param name="ourAirportsCountries">OurAirports airports</param>
-        /// <returns>Airports list</returns>
-        private static List<Country> BuildCountries(
+        /// <returns>Airport list</returns>
+        private List<Country> BuildCountries(
             IEnumerable<OurAirportsData.Country> ourAirportsCountries)
         {
             var countries = ourAirportsCountries
@@ -138,28 +157,12 @@ namespace Places
                         Code = model.Code,
                         Continent = model.Continent,
                         Name = model.Name,
+                        NameEs = _maxMindHandler.GetCountryName(model.Code, SpanishLangugeCode),
                         WikipediaLink = model.WikipediaLink,
                         Regions = new Collection<Region>()
                     })
                 .ToList();
             return countries;
-        }
-
-        /// <summary>
-        /// save Countries to database
-        /// </summary>
-        /// <param name="countries">Countries to save</param>
-        private static void SaveCountries(IEnumerable<Country> countries)
-        {
-            using (var db = new Context())
-            {
-                foreach (var country in countries)
-                {
-                    db.Countries.Add(country);
-                }
-                db.SaveChanges();
-            }
-            Console.WriteLine("All places have been added");
         }
     }
 }

@@ -16,6 +16,8 @@ namespace Places
         [RequiredAttribute]
         public string Name { get; set; }
 
+        public string NameEs { get; set; }
+
         [RequiredAttribute]
         [StringLengthAttribute(2)]
         public string Continent { get; set; }

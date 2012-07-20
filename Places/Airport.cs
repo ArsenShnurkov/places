@@ -28,6 +28,8 @@ namespace Places
 
         public string Municipality { get; set; }
 
+        public string MunicipalityEs { get; set; }
+
         [RequiredAttribute]
         public bool ScheduledService { get; set; }
 
