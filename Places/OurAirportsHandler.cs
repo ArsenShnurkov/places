@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
+using System;
 
 namespace Places
 {
@@ -30,19 +31,39 @@ namespace Places
         /// <returns>Country list</returns>
         internal List<Country> GetCountries()
         {
-            // get data from OurAirports
-            var ourAirportsCountries = OurAirportsData.Data.GetCountries(_ourAirportsCountriesFilePath).ToList();
-            var ourAirportsRegions = OurAirportsData.Data.GetRegions(_ourAirportsRegionsFilePath).ToList();
+            const string loadingMessage = "Loading {0} from OurAirports file...";
+
+            // get countries except unknown
+            Console.WriteLine(string.Format(loadingMessage, "Countries"));
+            var ourAirportsCountries = OurAirportsData.Data.GetCountries(_ourAirportsCountriesFilePath)
+                .Where(model => model.Code != "ZZ")
+                .ToList();
+
+            // get regions except unassigned
+            Console.WriteLine(string.Format(loadingMessage, "Regions"));
+            var ourAirportsRegions = OurAirportsData.Data.GetRegions(_ourAirportsRegionsFilePath)
+                .Where(model => model.LocalCode != "U-A")
+                .ToList();
+
+            // get active airports
+            Console.WriteLine(string.Format(loadingMessage, "Airports"));
+            var airportTypes = new string[] { "small_airport", "medium_airport", "large_airport" };
             var ourAirportsAirports = OurAirportsData.Data.GetAirports(_ourAirportsAirportsFilePath)
-                .Where(model => model.ScheduledService == "yes").ToList();
+                .Where(model => airportTypes.Contains(model.Type) && model.ScheduledService == "yes" && model.IataCode != string.Empty)
+                .ToList();
+
+            const string buildingMessage = "Building {0} objects...";
 
             // build Countries list
+            Console.WriteLine(string.Format(buildingMessage, "Countries"));
             var countries = BuildCountries(ourAirportsCountries);
 
             // add Regions to their Country
+            Console.WriteLine(string.Format(buildingMessage, "Regions"));
             AddRegionsToCountries(ourAirportsRegions, ref countries);
 
             // add Airports to their Region
+            Console.WriteLine(string.Format(buildingMessage, "Airports"));
             AddAirportsToCountryRegions(ourAirportsAirports, ref countries);
 
             return countries;
@@ -102,19 +123,19 @@ namespace Places
             var airport = new Airport
                 {
                     Elevation = ourAirportsRegionAirport.Elevation,
-                    GpsCode = ourAirportsRegionAirport.GpsCode,
-                    HomeLink = ourAirportsRegionAirport.HomeLink,
-                    IataCode = ourAirportsRegionAirport.IataCode,
+                    GpsCode = ourAirportsRegionAirport.GpsCode != string.Empty ? ourAirportsRegionAirport.GpsCode : null,
+                    HomeLink = ourAirportsRegionAirport.HomeLink != string.Empty ? ourAirportsRegionAirport.HomeLink : null,
+                    IataCode = ourAirportsRegionAirport.IataCode != string.Empty ? ourAirportsRegionAirport.IataCode : null,
                     Ident = ourAirportsRegionAirport.Ident,
                     Latitude = ourAirportsRegionAirport.Latitude,
-                    LocalCode = ourAirportsRegionAirport.LocalCode,
+                    LocalCode = ourAirportsRegionAirport.LocalCode != string.Empty ? ourAirportsRegionAirport.LocalCode : null,
                     Longitude = ourAirportsRegionAirport.Longitude,
-                    Municipality = ourAirportsRegionAirport.Municipality,
+                    Municipality = ourAirportsRegionAirport.Municipality != string.Empty ? ourAirportsRegionAirport.Municipality : null,
                     MunicipalityEs = _maxMindHandler.GetCityName(ourAirportsRegionAirport.Municipality, SpanishLangugeCode),
                     Name = ourAirportsRegionAirport.Name,
                     ScheduledService = ourAirportsRegionAirport.ScheduledService == "yes",
                     Type = ourAirportsRegionAirport.Type,
-                    WikipediaLink = ourAirportsRegionAirport.WikipediaLink
+                    WikipediaLink = ourAirportsRegionAirport.WikipediaLink != string.Empty ? ourAirportsRegionAirport.WikipediaLink : null
                 };
             return airport;
         }
@@ -122,7 +143,7 @@ namespace Places
         /// <summary>
         /// build a Region
         /// </summary>
-        /// <param name="ourAirportsCountryRegion">>OurAirports region</param>
+        /// <param name="ourAirportsCountryRegion">OurAirports region</param>
         /// <param name="continent">the continent code</param>
         /// <param name="countryCode">the Country code</param>
         /// <returns>the Region</returns>
@@ -137,7 +158,7 @@ namespace Places
                 NameEs = continent == "NA" ?
                     _maxMindHandler.GetNorthAmericaRegionName(countryCode, ourAirportsCountryRegion.LocalCode, SpanishLangugeCode) :
                     _maxMindHandler.GetNonNorthAmericaRegionName(countryCode, ourAirportsCountryRegion.Name, SpanishLangugeCode),
-                WikipediaLink = ourAirportsCountryRegion.WikipediaLink,
+                WikipediaLink = ourAirportsCountryRegion.WikipediaLink != string.Empty ? ourAirportsCountryRegion.WikipediaLink : null,
                 Airports = new Collection<Airport>()
             };
             return region;

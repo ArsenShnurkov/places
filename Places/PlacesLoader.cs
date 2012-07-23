@@ -32,9 +32,10 @@ namespace Places
                 {
                     db.Countries.Add(country);
                 }
+                Console.WriteLine("Saving places...");
                 db.SaveChanges();
             }
-            Console.WriteLine("All countries have been added.");
+            Console.WriteLine("All places have been saved. Press any key to finish.");
         }
     }
 }
