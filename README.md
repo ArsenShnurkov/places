@@ -8,36 +8,17 @@ The data source files are not included in this repo, as you might want to grab t
 ### OurAirports
 OurAirports CSV data dumps are all located at [ourairports.com/data](http://www.ourairports.com/data/). These data dumps give the basic structure and data of the database. Required files for this project are:
 
-* 	[countries.csv](http://www.ourairports.com/data/countries.csv)
-
-	List of countries.
-
-* 	[regions.csv](http://www.ourairports.com/data/regions.csv)
-
-	List of countries' regions.
-
-* 	[airports.csv](http://www.ourairports.com/data/airports.csv)
-
-	List and information of all airports on the site.
+* 	[countries.csv](http://www.ourairports.com/data/countries.csv): List of countries.
+* 	[regions.csv](http://www.ourairports.com/data/regions.csv): List of countries' regions.
+* 	[airports.csv](http://www.ourairports.com/data/airports.csv): List and information of all airports on the site.
 
 ### MaxMind
 MaxMind CSV data dumps are located at [maxmind.com/app/faq#localization](http://www.maxmind.com/app/faq#localization). These data dumps are used for localization purposes. A [zip file](http://www.maxmind.com/GeoIPLocationCSV-localized.zip) contains the required files:
 
-*	GeoIPCity-localized.csv
-
-	List of cities with localized names.
-
-*	fips10-4-localized.csv
-
-	List of Non-North American regions with localized names.
-
-*	iso-3166-2-localized.csv
-
-	List of North American regions with localized names.
-
-*	iso-3166-localized.csv
-
-	List of countries with localized names.
+*	GeoIPCity-localized.csv: List of cities with localized names.
+*	fips10-4-localized.csv: List of Non-North American regions with localized names.
+*	iso-3166-2-localized.csv: List of North American regions with localized names.
+*	iso-3166-localized.csv: List of countries with localized names.
 
 ## usage
 
