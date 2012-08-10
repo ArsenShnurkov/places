@@ -54,5 +54,5 @@ After grabbing all the data sources, set all the files paths on the `Places/App.
 
 ## bugs & todo
 
-*	Data between OurAirports and MaxMind will not always match, then some spanish localized names won't be found. For those `NULL` will be assigned.
+*	Data between OurAirports and MaxMind will not always match, then some Spanish localized names won't be found. For those `NULL` will be assigned.
 *	A data dump for Metropolitan Areas was not found, hence IATA codes like `NYC`, `CHI` and `BER` won't be found in the generated database. These areas and their codes are available [here](http://wikitravel.org/en/Metropolitan_Area_Airport_Codes).
