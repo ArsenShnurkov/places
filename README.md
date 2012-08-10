@@ -41,7 +41,7 @@ MaxMind CSV data dumps are located at [maxmind.com/app/faq#localization](http://
 
 ## usage
 
-After grabbing all the data sources, set all the files paths on the `Places/App.config` file. If you wish to run the test suite also set the paths on the `Test/App.config` file.
+After grabbing all the data sources, set all the file paths on the `Places/App.config` file. If you wish to run the test suite also set the paths on the `Test/App.config` file.
 
 ## required packages
 
