@@ -6,7 +6,7 @@ Database builder for countries, regions and airports from many sources. All this
 The data source files are not included in this repo, as you might want to grab the latest versions.
 
 ### OurAirports
-OurAirports CSV data dumps are all located at [ourairports.com/data/](http://www.ourairports.com/data/). These data dumps give the basic structure and data of the database. Required files for this project are:
+OurAirports CSV data dumps are all located at [ourairports.com/data](http://www.ourairports.com/data/). These data dumps give the basic structure and data of the database. Required files for this project are:
 
 * 	[countries.csv](http://www.ourairports.com/data/countries.csv)
 
