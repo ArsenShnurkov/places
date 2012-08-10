@@ -167,8 +167,8 @@ namespace Places
         /// <summary>
         /// build a Countries list
         /// </summary>
-        /// <param name="ourAirportsCountries">OurAirports airports</param>
-        /// <returns>Airport list</returns>
+        /// <param name="ourAirportsCountries">OurAirports countries</param>
+        /// <returns>Country list</returns>
         private List<Country> BuildCountries(
             IEnumerable<OurAirportsData.Country> ourAirportsCountries)
         {
