@@ -30,9 +30,6 @@ After grabbing all the data sources, set all the file paths on the `Places/App.c
 *	[FileHelpers](http://nuget.org/packages/FileHelpers)
 *	[xunit](http://nuget.org/packages/xunit)
 
-## License
-[MIT License](https://github.com/jonotrujillo/places/blob/master/LICENSE.md).
-
 ## Bugs & To-dos
 
 *	Data between OurAirports and MaxMind will not always match, then some Spanish localized names won't be found. For those `NULL` will be assigned.
