@@ -1,5 +1,6 @@
 # Places
-Database builder for countries, regions and airports from many sources. All this places include localized names for English and Spanish.
+
+Database builder for countries, regions and airports from multiple sources.
 
 ## Data Sources
 
